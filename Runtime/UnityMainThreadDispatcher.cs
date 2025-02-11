@@ -116,6 +116,13 @@ namespace PimDeWitte.UnityMainThreadDispatcher {
 				_instance = null;
 		}
 
-
+#if UNITY_EDITOR
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+		private static void DomainReset()
+		{
+			_instance = null;
+			_executionQueue.Clear();
+		}
+#endif
 	}
 }
